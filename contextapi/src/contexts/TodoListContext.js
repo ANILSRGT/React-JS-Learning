@@ -1,25 +1,18 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useReducer } from 'react';
+import uuid from 'react-uuid';
+import { todosReducer } from '../reducers/todosReducer';
 
 export const TodoListContext = createContext();
 
 const TodoListContextProvider = ({ children }) => {
-    const [todos, setTodos] = useState([
-        { id: 1, text: 'Plan the family trip' },
-        { id: 2, text: 'Go shopping for dinner' },
-        { id: 3, text: 'Go for a walk' }
+    const [todos, dispatch] = useReducer(todosReducer, [
+        { id: uuid(), text: 'Plan the family trip' },
+        { id: uuid(), text: 'Go shopping for dinner' },
+        { id: uuid(), text: 'Go for a walk' }
     ]);
 
-    const addTodo = (text) => {
-        const newTodo = { id: todos.length + 1, text };
-        setTodos([...todos, newTodo]);
-    }
-
-    const removeTodo = (id) => {
-        setTodos(todos.filter(todo => todo.id !== Number(id)));
-    }
-
     return (
-        <TodoListContext.Provider value={{ todos, addTodo, removeTodo }}>
+        <TodoListContext.Provider value={{ todos, dispatch }}>
             {children}
         </TodoListContext.Provider>
     );
