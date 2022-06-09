@@ -2,7 +2,7 @@ import React, { createContext, useState } from 'react';
 
 export const ThemeContext = createContext();
 
-const ThemeContextProvider = (props) => {
+const ThemeContextProvider = ({ children }) => {
     const [isDarkTheme, setIsDarkTheme] = useState(false);
     const [darkTheme, setDarkTheme] = useState({
         text: '#ffffff',
@@ -19,7 +19,7 @@ const ThemeContextProvider = (props) => {
 
     return (
         <ThemeContext.Provider value={{ isDarkTheme, darkTheme, lightTheme, changeTheme: changeTheme }}>
-            {props.children}
+            {children}
         </ThemeContext.Provider>
     );
 }

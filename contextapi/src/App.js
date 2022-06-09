@@ -3,15 +3,18 @@ import Navbar from './components/Navbar';
 import TodoList from './components/TodoList';
 import ThemeContextProvider from './contexts/ThemeContext';
 import AuthContextProvider from './contexts/AuthContext';
+import TodoListContextProvider from './contexts/TodoListContext';
 
 function App() {
   return (
     <div className="App">
-      <div className="ui raised very padded text container segment">
+      <div className="ui raised very padded text container segment" style={{ marginBottom: '20%' }}>
         <ThemeContextProvider>
           <AuthContextProvider>
-            <Navbar />
-            <TodoList />
+            <TodoListContextProvider>
+              <Navbar />
+              <TodoList />
+            </TodoListContextProvider>
           </AuthContextProvider>
         </ThemeContextProvider>
       </div>
